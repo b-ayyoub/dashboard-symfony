@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Détail du produit</h2>
+    <ul>
+        <li>Libellé : {{ produit.libelle }}</li>
+        <li>Prix : {{ produit.prix }} €</li>
+        <li>Stock : {{ produit.stock }}</li>
+        <li>Catégorie : {{ produit.categorie.nom }}</li>
+        <li>Référence : {{ produit.reference }}</li>
+    </ul>
+
+    {% if produit.photo %}
+        <div class="mb-3">
+            <h5>Photo actuelle :</h5>
+            <img src="{{ asset('uploads/' ~ produit.photo) }}" alt="Image" class="img-thumbnail" style="max-width: 300px;">
+        </div>
+    {% else %}
+        <p><em>Aucune image enregistrée pour ce produit.</em></p>
+    {% endif %}
+
+    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success mt-3">Enregistrer les modifications</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('produit_index') }}" class="btn btn-link mt-3">← Retour à la liste</a>
+{% endblock %}

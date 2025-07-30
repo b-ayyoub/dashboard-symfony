@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+
+<div class="">
+    <h1>Page d'accueil du site public </h1>
+    {% if app.user %}
+    <p>Bonjour {{ app.user.email }}</p>
+{% else %}
+    <a href="{{ path('app_login') }}">Se connecter</a>
+{% endif %}
+
+{# Si l'utilisateur a le rôle ADMIN #}
+{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin_dashboard') }}">Espace Admin</a>
+{% endif %}
+</div>
+{% endblock %}

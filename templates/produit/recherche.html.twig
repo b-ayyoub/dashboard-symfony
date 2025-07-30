@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche de produits{% endblock %}
+
+{% block body %}
+    <h1>Liste des produits</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Rechercher</button>
+    {{ form_end(form) }}
+
+    {% if app.request.get('search') %}
+        <p><strong>Recherche :</strong> "{{ app.request.get('search') }}"</p>
+    {% endif %}
+
+    <ul class="mt-4 list-group">
+        {% for produit in produits %}
+            <li class="list-group-item">
+                {{ produit.libelle }} ({{ produit.reference }})
+            </li>
+        {% else %}
+            <li class="list-group-item">Aucun résultat</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+<div class="products">
+    <div class="title">
+        <h2>Liste des produits</h2>
+    </div>
+    <div>
+        <label for="search"></label>
+        <input type="search" name="recherche" placeholder="Rechercher" id="search" class="search">
+    </div>
+    <div class="cta">
+        <button id="trashBtn" class="trashBtn">corbeille</button>
+    </div>
+    <div class="tableau">
+        <table>
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Catégorie</th>
+                    <th>Libellé</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableauDetail">
+                {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.reference }}</td>
+                        <td>{{ produit.categorie.nom}}</td>
+                        <td>{{ produit.libelle }}</td>
+                        <td>{{ produit.prix }} €</td>
+                        <td>{{ produit.stock }}</td>
+                        <td>
+                            <a href="{{ path('produit_show', { id: produit.id }) }}">voir</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Aucun produit trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
